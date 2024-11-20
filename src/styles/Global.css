@@ -1,0 +1,30 @@
+:root {
+  --color-white: #FFFFFF;
+  --color-dark-green: #2C4832;
+  --color-medium-green: #3F5D45;
+  --color-light-green: #EAF0ED;
+  --color-yellow: #FFE180;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
