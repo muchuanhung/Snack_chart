@@ -1,33 +1,49 @@
 {
 	"data": [
 		{
+			"id": 1,
 			"title": "檸檬磅蛋糕",
 			"price": 160,
 			"cover": "https://bit.ly/2OhbMHr"
 		},
 		{
+			"id": 2,
 			"title": "草莓蛋糕",
 			"price": 120,
 			"cover": "https://bit.ly/2zBDAxX"
 		},
 		{
+			"id": 3,
 			"title": "七彩馬卡龍",
 			"price": 200,
 			"cover": "https://bit.ly/2R5tqwD"
 		},
 		{
+			"id": 4,
 			"title": "焦糖蘋果派",
 			"price": 160,
 			"cover": "https://bit.ly/2R5tqwD"
 		},
-		{ "title": "莓果派", "price": 220, "cover": "https://bit.ly/2zKOP7w" },
-		{ "title": "甜甜圈", "price": 100, "cover": "https://bit.ly/2zBjQuq" },
 		{
+			"id": 5,
+			"title": "莓果派",
+			"price": 220,
+			"cover": "https://bit.ly/2zKOP7w"
+		},
+		{
+			"id": 6,
+			"title": "甜甜圈",
+			"price": 100,
+			"cover": "https://bit.ly/2zBjQuq"
+		},
+		{
+			"id": 7,
 			"title": "藍莓慕斯",
 			"price": 180,
 			"cover": "https://bit.ly/2QbVsVR"
 		},
 		{
+			"id": 8,
 			"title": "綜合水果優格",
 			"price": 150,
 			"cover": "https://bit.ly/2QiWeQW"

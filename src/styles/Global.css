@@ -1,16 +1,30 @@
 :root {
+  /* 全局顏色變數 */
   --color-white: #FFFFFF;
   --color-dark-green: #2C4832;
   --color-medium-green: #3F5D45;
   --color-light-green: #EAF0ED;
   --color-yellow: #FFE180;
+
+  /* 全局字體大小變數 */
+  --font-size-small: 16px;
+  --font-size-medium: 20px;
+  --font-size-large: 24px;
+
+  /* 網格和排版相關變數 */
+  --grid-gap: 20px; /* 全局的間距 */
+  --grid-foot-gap: 30px 122px; /* Footer的間距 */
+  --grid-columns-mobile: 1fr; /* 手機排版 */
+  --grid-columns-tablet: repeat(2, 1fr); /* 平板排版 */
+  --grid-columns-desktop: repeat(2, 1fr); /* 桌面排版 */
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
 
 *,
 *::before,
