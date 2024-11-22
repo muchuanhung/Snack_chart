@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart, updateQuantity, removeItem } from '../features/cartSlice';
 import Cart from '../components/Cart';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -17,15 +19,11 @@ const ProductPage = () => {
     { name: '新品上市', count: 12 },
   ];
   const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState(() => {
-    // 初始化時從 localStorage 加載購物車資料
-    const savedCart = localStorage.getItem('cartItems');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-  const [cartCount, setCartCount] = useState(0);
   const [showCart, setShowCart] = useState(false);
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartCount = useSelector((state) => state.cart.totalQuantity);
+  const dispatch = useDispatch();
 
-  // 取得產品資料
   useEffect(() => {
     fetch('/api/productions.json')
       .then((response) => {
@@ -40,60 +38,6 @@ const ProductPage = () => {
         alert('無法加載產品資料，請稍後再試。');
       });
   }, []);
-
-  // 計算購物車商品總數
-  useEffect(() => {
-    const totalCount = cartItems.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
-    setCartCount(totalCount);
-
-    // 同步購物車資料到 localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  // 新增商品到購物車
-  const addToCart = (product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
-      const updatedCart = existingItem
-        ? prevItems.map((item) =>
-            item.id === product.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          )
-        : [...prevItems, { ...product, quantity: 1 }];
-
-      // 儲存到 localStorage
-      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  };
-
-  // 更新商品數量
-  const updateQuantity = (id, quantity) => {
-    const updatedCart = setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
-      )
-    );
-
-    // 儲存到 localStorage
-    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-    return updatedCart;
-  };
-
-  // 刪除商品
-  const removeItem = (id) => {
-    setCartItems((prevItems) => {
-      const updatedCart = prevItems.filter((item) => item.id !== id);
-
-      // 儲存到 localStorage
-      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  };
 
   return (
     <>
@@ -111,8 +55,10 @@ const ProductPage = () => {
         {showCart ? (
           <Cart
             cartItems={cartItems}
-            updateQuantity={updateQuantity}
-            removeItem={removeItem}
+            updateQuantity={(id, quantity) =>
+              dispatch(updateQuantity({ id, quantity }))
+            }
+            removeItem={(id) => dispatch(removeItem(id))}
           />
         ) : (
           <>
@@ -126,7 +72,7 @@ const ProductPage = () => {
             <Product
               products={products}
               activeCategory={activeCategory}
-              addToCart={addToCart}
+              addToCart={(product) => dispatch(addToCart(product))}
             />
           </>
         )}
