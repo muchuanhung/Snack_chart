@@ -1,8 +1,5 @@
 /* Header 樣式 */
 .header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-medium-green);
 }
@@ -13,33 +10,15 @@
 }
 
 /* Banner 樣式 */
-.banner {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin: 30px 42px 60px;
-}
-
-.bannerimg {
-  width: 940px;
-  height: 496px;
-}
-
 .bannerslogn {
   position: absolute;
-  top: 140px;
-  left: 853px;
-  width: 89px;
-  height: 328px;
+  top: 10%;
+  left: 75%;
+  height: 219px;
   z-index: 2;
 }
 
 /* Sidebar 樣式 */
-.sidebar {
-  width: 300px;
-  margin-bottom: 20px;
-}
-
 .sidebar-category {
   height: 65px;
   color: var(--color-white);
@@ -61,19 +40,11 @@
 }
 
 /* Content 樣式 */
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-}
-
 .product-list {
   display: grid;
   gap: var(--grid-gap);
   grid-template-columns: var(--grid-columns-mobile);
 }
-
 
 .product-card {
   border: 1px solid var(--color-medium-green);
@@ -120,22 +91,28 @@
   transition: background-color 0.3s ease;
 }
 
-.add-to-cart:hover {
-  background-color: var(--color-medium-green);
+.add-to-cart:active {
+  background-color: var(--color-yellow) !important;
 }
 
 .cart-icon {
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-icon:active {
+  color: var(--color-yellow) !important;
 }
 
 /* Footer 樣式 */
-.subscribe, .info {
-  padding: var(--grid-foot-gap);
-}
 .subscribe {
   background-color: var(--color-medium-green);
   color: var(--color-light-green);
   font-size: var(--font-size-large);
+}
+
+.subscribe-text {
+  width: 375px;
 }
 
 .info {
@@ -153,7 +130,6 @@
 }
 
 .info-text {
-  margin-top: 155.5px;
   color: var(--color-dark-green);
   font-size: var(--font-size-small);
 }
@@ -180,11 +156,18 @@
 }
 
 .input-group-text {
-  width: 380px;
+  width: 315px;
 }
 
 .input-group-arrow {
+  width: 64px;
+  height: 56px;
   background-color: var(--color-yellow) !important;
+}
+
+.bannerimg {
+  width: 375px;
+  height: 277px;
 }
 
 /* RWD 样式 */
@@ -192,25 +175,31 @@
   .product-list {
     grid-template-columns: var(--grid-columns-tablet);
   }
+
+  .bannerimg {
+    width: 940px;
+    height: 496px;
+  }
+
+  .banner {
+    margin: 30px 42px 60px;
+  }
+
+  .bannerslogn {
+    position: absolute;
+    top: 10%;
+    left: 75%;
+    height: 328px;
+    z-index: 2;
+  }
+
+  .subscribe, .info {
+    padding: var(--grid-foot-gap);
+  }
 }
 
 @media (min-width: 961px) {
   .product-list {
     grid-template-columns: var(--grid-columns-desktop);
-  }
-
-  .content {
-    flex-direction: row;
-  }
-
-  .sidebar {
-    margin-right: 20px;
-    margin-bottom: 0;
-  }
-}
-
-@media (min-width: 576px) {
-  .product-list {
-    grid-template-columns: repeat(2, 1fr);
   }
 }

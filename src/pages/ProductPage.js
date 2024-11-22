@@ -73,7 +73,7 @@ const ProductPage = () => {
   return (
     <>
       {/* Navbar */}
-      <header className="header">
+      <header className="header d-flex justify-content-between align-items-center py-3 px-4">
         <img
           className="headerlogo"
           src={headerlogo}
@@ -85,12 +85,12 @@ const ProductPage = () => {
         </div>
       </header>
       {/* Banner */}
-      <div className="banner">
+      <div className="banner position-relative d-flex justify-content-center">
         <img className="bannerimg" src={bannerimg} alt="Banner" />
         <img className="bannerslogn" src={bannerslogn} alt="Banner_slogn" />
       </div>
       {/* Body */}
-      <div className="content">
+      <div className="content d-flex flex-column flex-md-row justify-content-center pb-5">
         {showCart ? (
           <Cart
             cartItems={cartItems}
@@ -99,7 +99,7 @@ const ProductPage = () => {
           />
         ) : (
           <>
-            <aside className="sidebar">
+            <aside className="sidebar mb-5 mb-md-0 me-md-4">
               <div className="sidebar-category">甜點類別</div>
               <ul className="p-0">
                 {categories.map((category) => (
@@ -116,7 +116,7 @@ const ProductPage = () => {
             {products.length === 0 ? (
               <div>加載中...</div>
             ) : (
-              <main className="product-list">
+              <main className="product-list mx-4 mx-md-0">
                 {products
                   .filter(
                     (product) =>
@@ -135,9 +135,9 @@ const ProductPage = () => {
                         </span>
                       </div>
                       <button
-                        preventDefault
                         className="add-to-cart"
-                        onClick={() => {
+                        onClick={(event) => {
+                          event.preventDefault();
                           addToCart(product);
                         }}
                       >
@@ -153,40 +153,42 @@ const ProductPage = () => {
       {/* Footer */}
       <footer>
         {/* Logo 與訂閱區域 */}
-        <div className="subscribe d-flex">
-          <div className="col-md-6 d-flex align-items-center">
+        <div className="subscribe d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <div className="subscribe-text d-flex align-items-center justify-content-center">
             <img
-              className="footericon px-4"
+              className="footericon px-2"
               src={footericon}
               alt="FooterIcon"
             />
             <div>訂閱你我的甜蜜郵件</div>
           </div>
-          <div className="col-md-6">
+          <div className="subscribe-form d-flex align-items-center">
             <form
-              className="subscription-form d-flex"
+              className="d-flex"
               onSubmit={(e) => {
                 e.preventDefault();
                 alert('感謝訂閱！');
               }}
             >
-              <div className="input-group">
-                <span className="input-group-text">
-                  <i className="pe-2 bi bi-envelope-fill"></i>
-                  <input type="email" placeholder="輸入您的電子郵件" />
+              <div className="input-group d-flex my-4">
+                <span className="input-group-text d-flex align-items-center justify-content-between p-0">
+                  <div className="d-flex align-items-center ps-3">
+                    <i className="pe-2 bi bi-envelope-fill"></i>
+                    <input type="email" placeholder="輸入您的電子郵件" />
+                  </div>
+                  <button type="submit" className="input-group-arrow">
+                    <i className="bi bi-arrow-right"></i>
+                  </button>
                 </span>
-                <button type="submit" className="input-group-arrow">
-                  <i className="bi bi-arrow-right"></i>
-                </button>
               </div>
             </form>
           </div>
         </div>
         {/* 聯絡資訊 */}
-        <div className="info d-flex">
-          <div className="col-md-6">
+        <div className="info d-flex flex-column flex-md-row p-4">
+          <div className="col-md-6 d-flex flex-column justify-content-between">
             <img className="footerlogo" src={footerlogo} alt="FooterLogo" />
-            <div className="info-text d-flex flex-column">
+            <div className="info-text d-flex flex-column my-4">
               {[
                 '07-1234-5678',
                 'sweettaste@email.com',
@@ -208,8 +210,12 @@ const ProductPage = () => {
               />
             </div>
           </div>
-          <div className="col-md-6 d-flex flex-column align-items-end">
-            <img className="footerslogn" src={footerslogn} alt="footer-slogn" />
+          <div className="col-md-6 d-flex flex-column align-items-start align-items-md-end">
+            <img
+              className="footerslogn d-none d-md-block"
+              src={footerslogn}
+              alt="footer-slogn"
+            />
             <div className="info-copyright">
               © 2018 Sweetaste* All Rights Reserved
             </div>

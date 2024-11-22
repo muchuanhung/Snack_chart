@@ -1,17 +1,8 @@
-/* 通用樣式 */
-.cart-page {
-    display: flex;
-    padding: 20px;
-    gap: 20px;
-  }
-  
   /* 左側購物車內容 */
   .cart-container {
     flex: 2;
     background-color: #fff;
-    border: 1px solid var(--color-light-green);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--color-light-green);
   }
   
   .cart-title {
@@ -19,68 +10,55 @@
     background-color: var(--color-light-green);
   }
   
-  .cart-items {
-    display: flex;
-    flex-direction: column;
-  }
-  
   .cart-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 10px;
+    padding-top: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-light-green);
   }
-  
+ 
   .cart-item-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    margin-right: 15px;
+    width: 110px;
+    height: 110px;
+    margin-right: 39px;
   }
   
-  .cart-item-info {
-    flex: 1;
-  }
-  
-  .cart-item-name {
-    font-size: 18px;
-    font-weight: 600;
+  .cart-item-name, .cart-item-total-price  {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
   }
   
   .cart-item-price {
-    color: #757575;
+    font-size: var(--font-size-small);
+    color: var(--color-dark-green);
     margin-top: 5px;
   }
   
   .cart-item-quantity {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
+    font-size: var(--font-size-small);
   }
   
-  .quantity-btn {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
+  .quantity-btn, .quantity-number {
+    background-color: var(--color-white) !important;
+    border: 0.5px solid var(--color-light-green);
     padding: 5px 10px;
-    font-size: 16px;
+    font-size: var(--font-size-small);
     cursor: pointer;
-    margin: 0 5px;
   }
   
   .remove-item {
-    background: none;
+    background-color: var(--color-white) !important;
     border: none;
-    color: #ff5252;
     cursor: pointer;
-    font-size: 20px;
+    font-size: var(--font-size-medium);
   }
   
   /* 右側訂單摘要 */
   .order-summary-container {
-    flex: 1;
+    flex: 1; /* 右側固定比例 */
     background-color: var(--color-dark-green);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* 固定高度不縮小 */
+    height: 258px;
   }
   
   .summary-title {
@@ -90,23 +68,18 @@
   
   .order-summary {
     color: var(--color-light-green);
-  }
-  
-  .summary-item {
-    display: flex;
-    justify-content: space-between;
     font-size: var(--font-size-small);
   }
+
   
   .summary-total {
-    display: flex;
-    justify-content: space-between;
     font-size: var(--font-size-medium);
     font-weight: bold;
   }
   
   .checkout-button {
     width: 100%;
+    height: 65px;
     background-color: var(--color-yellow) !important;
     color: var(--color-dark-green);
     border: none;
