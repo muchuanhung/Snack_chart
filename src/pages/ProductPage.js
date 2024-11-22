@@ -51,7 +51,7 @@ const ProductPage = () => {
       {/* Banner */}
       <Banner />
       {/* Body */}
-      <div className="content d-flex flex-column flex-md-row justify-content-center px-0 px-md-5 pb-5">
+      <div className="content d-flex flex-column flex-md-row justify-content-center px-0 px-md-5 pb-md-5">
         {showCart ? (
           <Cart
             cartItems={cartItems}

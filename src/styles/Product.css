@@ -71,8 +71,7 @@
   color: var(--color-yellow) !important;
 }
 
-
-/* RWD 样式 */
+/* RWD 樣式 */
 @media (min-width: 576px) {
   .product-list {
     grid-template-columns: var(--grid-columns-tablet);

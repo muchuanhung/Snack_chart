@@ -65,7 +65,7 @@ const Cart = ({ cartItems, removeItem, updateQuantity }) => {
       </div>
       {/* 右側訂單摘要 */}
       <div className="order-summary-container">
-        <div className="summary-title d-flex justify-content-center align-items-center border-bottom m-2">
+        <div className="summary-title d-flex justify-content-center align-items-center p-3 m-2">
           訂單摘要
         </div>
         <div className="order-summary d-flex flex-column gap-3 p-4">
