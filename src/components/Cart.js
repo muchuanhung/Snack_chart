@@ -10,7 +10,7 @@ const Cart = ({ cartItems, removeItem, updateQuantity }) => {
   return (
     <>
       {/* 左側購物車商品列表 */}
-      <div className="cart-container me-3">
+      <div className="cart-container me-md-3">
         <div className="cart-title fw-bold text-center py-2">您的購物車</div>
         {cartItems.length === 0 ? (
           <p>購物車是空的。</p>

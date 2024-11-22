@@ -16,7 +16,11 @@ const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState('所有甜點');
   const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    // 初始化時從 localStorage 加載購物車資料
+    const savedCart = localStorage.getItem('cartItems');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
   const categories = [
     { name: '所有甜點', count: 48 },
@@ -45,29 +49,40 @@ const ProductPage = () => {
   const addToCart = (product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prevItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevItems, { ...product, quantity: 1 }];
+      const updatedCart = existingItem
+        ? prevItems.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          )
+        : [...prevItems, { ...product, quantity: 1 }];
+
+      // 儲存到 localStorage
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+      return updatedCart;
     });
   };
 
   // 更新商品數量
   const updateQuantity = (id, quantity) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
-      )
+    const updatedCart = prevItems.map((item) =>
+      item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
     );
+
+    // 儲存到 localStorage
+    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    return updatedCart;
   };
 
   // 刪除商品
   const removeItem = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setCartItems((prevItems) => {
+      const updatedCart = prevItems.filter((item) => item.id !== id);
+
+      // 儲存到 localStorage
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
 
   return (
@@ -90,7 +105,7 @@ const ProductPage = () => {
         <img className="bannerslogn" src={bannerslogn} alt="Banner_slogn" />
       </div>
       {/* Body */}
-      <div className="content d-flex flex-column flex-md-row justify-content-center pb-5">
+      <div className="content d-flex flex-column flex-md-row justify-content-center px-0 px-md-5 pb-5">
         {showCart ? (
           <Cart
             cartItems={cartItems}
@@ -124,7 +139,13 @@ const ProductPage = () => {
                       product.category === activeCategory
                   )
                   .map((product, index) => (
-                    <div className="product-card" key={product.id}>
+                    <div
+                      className="product-card position-relative"
+                      key={product.id}
+                    >
+                      <div className="product-category position-absolute top-0 start-0 py-4 ms-3">
+                        本日精選
+                      </div>
                       <div className="product-image">
                         <img src={product.cover} alt={product.image} />
                       </div>
@@ -154,7 +175,7 @@ const ProductPage = () => {
       <footer>
         {/* Logo 與訂閱區域 */}
         <div className="subscribe d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <div className="subscribe-text d-flex align-items-center justify-content-center">
+          <div className="subscribe-text d-flex align-items-center justify-content-center pt-4 pt-md-0">
             <img
               className="footericon px-2"
               src={footericon}

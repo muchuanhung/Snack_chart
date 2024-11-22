@@ -54,6 +54,14 @@
   background-color: var(--color-white);
 }
 
+.product-category {
+  background-color: var(--color-dark-green);
+  color: var(--color-light-green);
+  padding: 10px;
+  writing-mode: vertical-rl; /* 將文字設為垂直方向（從右到左） */
+  text-orientation: upright; /* 保持每個字直立 */
+}
+
 .product-image {
   height: 200px;
   display: flex;
