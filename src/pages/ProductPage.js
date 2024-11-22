@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { FaShoppingCart } from 'react-icons/fa';
 import Cart from '../components/Cart';
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
+import Product from '../components/Product';
+import Footer from '../components/Footer';
+import Banner from '../components/Banner';
 import '../styles/ProductPage.css';
 import '../styles/Global.css';
-import headerlogo from '../assets/source/logo-all-dark.svg';
-import bannerimg from '../assets/source/photo-1512484457149-266d165a4eca.avif';
-import bannerslogn from '../assets/source/lg-想吃甜點是不需要理由的.svg';
-import footericon from '../assets/source/logo-light.svg';
-import footerlogo from '../assets/source/logotype-sm-dark.svg';
-import footerslogn from '../assets/source/sm-今天是個吃甜點的好日子.svg';
-import iconline from '../assets/source/ic-line@.svg';
-import iconfacebook from '../assets/source/ic-facebook.svg';
 
 const ProductPage = () => {
-  const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState('所有甜點');
-  const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState(() => {
-    // 初始化時從 localStorage 加載購物車資料
-    const savedCart = localStorage.getItem('cartItems');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-  const [cartCount, setCartCount] = useState(0);
   const categories = [
     { name: '所有甜點', count: 48 },
     { name: '本日精選', count: 10 },
     { name: '人氣推薦', count: 26 },
     { name: '新品上市', count: 12 },
   ];
+  const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    // 初始化時從 localStorage 加載購物車資料
+    const savedCart = localStorage.getItem('cartItems');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  const [cartCount, setCartCount] = useState(0);
+  const [showCart, setShowCart] = useState(false);
 
   // 取得產品資料
   useEffect(() => {
@@ -47,7 +43,10 @@ const ProductPage = () => {
 
   // 計算購物車商品總數
   useEffect(() => {
-    const totalCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const totalCount = cartItems.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
     setCartCount(totalCount);
 
     // 同步購物車資料到 localStorage
@@ -74,8 +73,10 @@ const ProductPage = () => {
 
   // 更新商品數量
   const updateQuantity = (id, quantity) => {
-    const updatedCart = prevItems.map((item) =>
-      item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
+    const updatedCart = setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
+      )
     );
 
     // 儲存到 localStorage
@@ -97,23 +98,14 @@ const ProductPage = () => {
   return (
     <>
       {/* Navbar */}
-      <header className="header d-flex justify-content-between align-items-center py-3 px-4">
-        <img
-          className="headerlogo"
-          src={headerlogo}
-          alt="Logo"
-          onClick={() => setShowCart(false)}
-        />
-        <div className="cart-icon position-relative" onClick={() => setShowCart(true)}>
-        <FaShoppingCart size={24} />
-        {cartCount > 0 && <span className="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{cartCount}</span>}
-      </div>
-      </header>
+      <Header
+        cartItems={cartItems}
+        cartCount={cartCount}
+        showCart={showCart}
+        setShowCart={setShowCart}
+      />
       {/* Banner */}
-      <div className="banner position-relative d-flex justify-content-center">
-        <img className="bannerimg" src={bannerimg} alt="Banner" />
-        <img className="bannerslogn" src={bannerslogn} alt="Banner_slogn" />
-      </div>
+      <Banner />
       {/* Body */}
       <div className="content d-flex flex-column flex-md-row justify-content-center px-0 px-md-5 pb-5">
         {showCart ? (
@@ -124,135 +116,23 @@ const ProductPage = () => {
           />
         ) : (
           <>
-            <aside className="sidebar mb-5 mb-md-0 me-md-4">
-              <div className="sidebar-category">甜點類別</div>
-              <ul className="p-0">
-                {categories.map((category) => (
-                  <li
-                    key={category.name}
-                    className={activeCategory === category.name ? 'active' : ''}
-                    onClick={() => setActiveCategory(category.name)}
-                  >
-                    {category.name} ({category.count})
-                  </li>
-                ))}
-              </ul>
-            </aside>
-            {products.length === 0 ? (
-              <div>加載中...</div>
-            ) : (
-              <main className="product-list mx-4 mx-md-0">
-                {products
-                  .filter(
-                    (product) =>
-                      activeCategory === '所有甜點' ||
-                      product.category === activeCategory
-                  )
-                  .map((product, index) => (
-                    <div
-                      className="product-card position-relative"
-                      key={product.id}
-                    >
-                      <div className="product-category position-absolute top-0 start-0 py-4 ms-3">
-                        本日精選
-                      </div>
-                      <div className="product-image">
-                        <img src={product.cover} alt={product.image} />
-                      </div>
-                      <div className="product-info">
-                        <span className="product-name">{product.title}</span>
-                        <span className="product-price">
-                          NT$ {product.price}
-                        </span>
-                      </div>
-                      <button
-                        className="add-to-cart"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          addToCart(product);
-                        }}
-                      >
-                        加入購物車
-                      </button>
-                    </div>
-                  ))}
-              </main>
-            )}
+            {/* Sidebar */}
+            <Sidebar
+              categories={categories}
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+            />
+            {/* Product List */}
+            <Product
+              products={products}
+              activeCategory={activeCategory}
+              addToCart={addToCart}
+            />
           </>
         )}
       </div>
       {/* Footer */}
-      <footer>
-        {/* Logo 與訂閱區域 */}
-        <div className="subscribe d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <div className="subscribe-text d-flex align-items-center justify-content-center pt-4 pt-md-0">
-            <img
-              className="footericon px-2"
-              src={footericon}
-              alt="FooterIcon"
-            />
-            <div>訂閱你我的甜蜜郵件</div>
-          </div>
-          <div className="subscribe-form d-flex align-items-center">
-            <form
-              className="d-flex"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert('感謝訂閱！');
-              }}
-            >
-              <div className="input-group d-flex my-4">
-                <span className="input-group-text d-flex align-items-center justify-content-between p-0">
-                  <div className="d-flex align-items-center ps-3">
-                    <i className="pe-2 bi bi-envelope-fill"></i>
-                    <input type="email" placeholder="輸入您的電子郵件" />
-                  </div>
-                  <button type="submit" className="input-group-arrow">
-                    <i className="bi bi-arrow-right"></i>
-                  </button>
-                </span>
-              </div>
-            </form>
-          </div>
-        </div>
-        {/* 聯絡資訊 */}
-        <div className="info d-flex flex-column flex-md-row p-4">
-          <div className="col-md-6 d-flex flex-column justify-content-between">
-            <img className="footerlogo" src={footerlogo} alt="FooterLogo" />
-            <div className="info-text d-flex flex-column my-4">
-              {[
-                '07-1234-5678',
-                'sweettaste@email.com',
-                '800 高雄市新興區幸福路 520 號',
-              ].map((info, index) => (
-                <div key={index}>{info}</div>
-              ))}
-            </div>
-            <div className="info-icon d-flex">
-              <img
-                className="info-icon-line me-2"
-                src={iconline}
-                alt="icon-line"
-              />
-              <img
-                className="info-icon-facebook"
-                src={iconfacebook}
-                alt="icon-facebook"
-              />
-            </div>
-          </div>
-          <div className="col-md-6 d-flex flex-column align-items-start align-items-md-end">
-            <img
-              className="footerslogn d-none d-md-block"
-              src={footerslogn}
-              alt="footer-slogn"
-            />
-            <div className="info-copyright">
-              © 2018 Sweetaste* All Rights Reserved
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 };

@@ -6,6 +6,7 @@ const Cart = ({ cartItems, removeItem, updateQuantity }) => {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+
   const shipping = total > 0 ? 300 : 0;
   return (
     <>

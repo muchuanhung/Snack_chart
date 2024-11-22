@@ -1,0 +1,10 @@
+/* Header 樣式 */
+.header {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-medium-green);
+  }
+  
+.headerlogo {
+    width: 171px;
+    height: 27px;
+}

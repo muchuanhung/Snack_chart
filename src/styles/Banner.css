@@ -1,0 +1,34 @@
+/* Banner 樣式 */
+.bannerslogn {
+    position: absolute;
+    top: 10%;
+    left: 75%;
+    height: 219px;
+    z-index: 2;
+  }
+
+  .bannerimg {
+    width: 375px;
+    height: 277px;
+  }
+
+  /* RWD 樣式 */
+@media (min-width: 576px) {
+  .bannerimg {
+    width: 940px;
+    height: 496px;
+  }
+
+  .banner {
+    margin: 30px 42px 60px;
+  }
+
+  .bannerslogn {
+    position: absolute;
+    top: 10%;
+    left: 75%;
+    height: 328px;
+    z-index: 2;
+  }
+}
+  

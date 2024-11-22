@@ -1,0 +1,20 @@
+/* Sidebar 樣式 */
+.sidebar-category {
+    height: 65px;
+    color: var(--color-white);
+    background: var(--color-medium-green);
+    text-align: center;
+    line-height: 65px;
+  }
+  
+.sidebar li {
+  padding: 16px 66px;
+  color: var(--color-medium-green);
+  font-size: var(--font-size-large);
+cursor: pointer;
+border: 1px solid var(--color-light-green);
+}
+
+.sidebar li.active {
+  background-color: var(--color-light-green);
+}

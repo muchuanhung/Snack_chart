@@ -1,0 +1,67 @@
+/* Footer 樣式 */
+.subscribe {
+    background-color: var(--color-medium-green);
+    color: var(--color-light-green);
+    font-size: var(--font-size-large);
+  }
+  
+  .subscribe-text {
+    width: 375px;
+  }
+  
+  .info {
+    background-color: var(--color-light-green);
+  }
+  
+  .info-icon > img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .footerslogn {
+    width: 59px;
+    height: 219px;
+  }
+  
+  .info-text {
+    color: var(--color-dark-green);
+    font-size: var(--font-size-small);
+  }
+  
+  .info-copyright {
+    margin-top: 46px;
+    color: var(--color-dark-green);
+    font-size: var(--font-size-small);
+  }
+  
+  .footericon {
+    height: 40px;
+  }
+  
+  .footerlogo {
+    width: 171px;
+    height: 27px;
+  }
+  
+  .input-group > span, button, input {
+    border-radius: 0 !important;
+    border: 0;
+    background-color: var(--color-light-green) !important;
+  }
+  
+  .input-group-text {
+    width: 315px;
+  }
+  
+  .input-group-arrow {
+    width: 64px;
+    height: 56px;
+    background-color: var(--color-yellow) !important;
+  }
+
+  /* RWD 樣式 */
+@media (min-width: 576px) {
+  .subscribe, .info {
+    padding: var(--grid-foot-gap);
+  }
+}
