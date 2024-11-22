@@ -21,7 +21,7 @@ const ProductPage = () => {
     const savedCart = localStorage.getItem('cartItems');
     return savedCart ? JSON.parse(savedCart) : [];
   });
-
+  const [cartCount, setCartCount] = useState(0);
   const categories = [
     { name: '所有甜點', count: 48 },
     { name: '本日精選', count: 10 },
@@ -44,6 +44,15 @@ const ProductPage = () => {
         alert('無法加載產品資料，請稍後再試。');
       });
   }, []);
+
+  // 計算購物車商品總數
+  useEffect(() => {
+    const totalCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    setCartCount(totalCount);
+
+    // 同步購物車資料到 localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   // 新增商品到購物車
   const addToCart = (product) => {
@@ -95,9 +104,10 @@ const ProductPage = () => {
           alt="Logo"
           onClick={() => setShowCart(false)}
         />
-        <div className="cart-icon" onClick={() => setShowCart(true)}>
-          <FaShoppingCart size={24} />
-        </div>
+        <div className="cart-icon position-relative" onClick={() => setShowCart(true)}>
+        <FaShoppingCart size={24} />
+        {cartCount > 0 && <span className="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{cartCount}</span>}
+      </div>
       </header>
       {/* Banner */}
       <div className="banner position-relative d-flex justify-content-center">
