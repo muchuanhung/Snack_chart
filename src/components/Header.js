@@ -18,11 +18,10 @@ const Header = ({ cartItems, cartCount, showCart, setShowCart }) => {
           onClick={() => setShowCart(true)}
         >
           <FaShoppingCart size={24} />
-          {cartCount > 0 && (
-            <span className="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {cartCount}
-            </span>
-          )}
+
+          <span className="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {cartCount}
+          </span>
         </div>
       </header>
     </>

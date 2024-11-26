@@ -5,15 +5,23 @@ const Sidebar = ({ categories, activeCategory, setActiveCategory }) => {
   return (
     <>
       <aside className="sidebar mb-5 mb-md-0 me-md-4">
-        <div className="sidebar-category">甜點類別</div>
+        <h2 className="sidebar-category">甜點類別</h2>
         <ul className="p-0">
           {categories.map((category) => (
-            <li
-              key={category.name}
-              className={activeCategory === category.name ? 'active' : ''}
-              onClick={() => setActiveCategory(category.name)}
-            >
-              {category.name} ({category.count})
+            <li key={category.name}>
+              <a
+                href="#"
+                className={activeCategory === category.name ? 'active' : ''}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveCategory(category.name);
+                }}
+                aria-current={
+                  activeCategory === category.name ? 'page' : undefined
+                }
+              >
+                {category.name} ({category.count})
+              </a>
             </li>
           ))}
         </ul>

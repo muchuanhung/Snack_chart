@@ -13,7 +13,6 @@
   .cart-item {
     padding-top: 32px;
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--color-light-green);
   }
  
   .cart-item-image {
@@ -73,9 +72,18 @@
     color: var(--color-dark-green);
     font-size: var(--font-size-small);
   }
+  .cart-item-image-container {
+    width: 100%;
+  }
 
   /* RWD 樣式 */
   @media (min-width: 576px) {
+    .cart-item {
+      border-bottom: 1px solid var(--color-light-green);
+    }
+    .cart-item-image-container {
+      width: auto;
+    }
     .order-summary-container {
       background-color: var(--color-dark-green);
       }

@@ -20,7 +20,7 @@ const Product = ({ products, activeCategory, addToCart }) => {
                   本日精選
                 </div>
                 <div className="product-image">
-                  <img src={product.cover} alt={product.image} />
+                  <img src={product.cover} loading="lazy" alt={product.image} />
                 </div>
                 <div className="product-info">
                   <span className="product-name">{product.title}</span>

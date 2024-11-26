@@ -19,41 +19,83 @@ const Cart = ({ cartItems, removeItem, updateQuantity }) => {
           <div className="cart-items">
             {cartItems.map((item) => (
               <div
-                className="cart-item d-flex align-items-center justify-content-between"
+                className="cart-item d-flex align-items-end align-items-md-center justify-content-center justify-content-md-between flex-column flex-md-row p-5"
                 key={item.id}
               >
-                <img
-                  src={item.cover}
-                  alt={item.title}
-                  className="cart-item-image"
-                />
-                {/* 中間區域 */}
-                <div className="cart-item-name-price d-flex flex-column justify-content-between">
-                  <span className="cart-item-name">{item.title}</span>
-                  <span className="cart-item-price">NT$ {item.price}</span>
+                <div className="cart-item-image-container d-flex flex-row align-items-center">
+                  <img
+                    src={item.cover}
+                    alt={item.title}
+                    className="cart-item-image"
+                  />
+                  {/* 網頁 */}
+                  <div className="cart-item-name-price d-flex flex-column justify-content-between d-none d-md-block">
+                    <span className="cart-item-name">{item.title}</span>
+                    <span className="cart-item-price px-md-3">
+                      NT$ {item.price}
+                    </span>
+                  </div>
+                  {/* 數量 */}
+                  <div className="cart-item-quantity d-flex flex-row text-center d-none d-md-block">
+                    <button
+                      className="quantity-btn"
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      disabled={item.quantity === 1}
+                    >
+                      -
+                    </button>
+                    <span className="quantity-number">{item.quantity}</span>
+                    <button
+                      className="quantity-btn"
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  {/* 手機 */}
+                  <div className="d-flex flex-column d-md-none">
+                    <div className="cart-item-name-price d-flex flex-column justify-content-center">
+                      <span className="cart-item-name">{item.title}</span>
+                      <span className="cart-item-price">NT$ {item.price}</span>
+                    </div>
+                    {/* 數量 */}
+                    <div className="cart-item-quantity d-flex flex-row text-center">
+                      <button
+                        className="quantity-btn"
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
+                        disabled={item.quantity === 1}
+                      >
+                        -
+                      </button>
+                      <span className="quantity-number">{item.quantity}</span>
+                      <button
+                        className="quantity-btn"
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div className="cart-item-quantity d-flex flex-row text-center">
-                  <button
-                    className="quantity-btn"
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    disabled={item.quantity === 1}
-                  >
-                    -
-                  </button>
-                  <span className="quantity-number">{item.quantity}</span>
-                  <button
-                    className="quantity-btn"
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="cart-item-total-price">
+
+                {/* 網頁總價 */}
+                <div className="cart-item-total-price d-none d-md-block">
                   NT$ {item.price * item.quantity}
                 </div>
+
+                {/* 手機總價 */}
+                <div className="cart-item-total-price d-md-none border-top border-bottom mt-3 py-3 w-100 text-end">
+                  NT$ {item.price * item.quantity}
+                </div>
+
                 {/* 右側刪除按鈕 */}
                 <button
-                  className="remove-item"
+                  className="remove-item d-none d-md-block"
                   onClick={() => removeItem(item.id)}
                 >
                   <i className="bi bi-trash"></i>

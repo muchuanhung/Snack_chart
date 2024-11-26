@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 // 計算購物車商品總數
+const storedItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 const initialState = {
-  items: JSON.parse(localStorage.getItem('cartItems')) || [],
-  totalQuantity: 0,
+  items: storedItems,
+  totalQuantity: storedItems.reduce((total, item) => total + item.quantity, 0),
 };
 
 const cartSlice = createSlice({
